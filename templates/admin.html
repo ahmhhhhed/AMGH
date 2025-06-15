@@ -1,0 +1,37 @@
+
+{% extends 'base.html' %}
+{% block title %}الدعم الفني{% endblock %}
+{% block content %}
+<h2 class="text-xl font-bold mb-4 text-center">واجهة الدعم الفني</h2>
+<form method="POST" class="grid grid-cols-2 gap-4 bg-white p-6 rounded shadow mb-6">
+    <input name="name" placeholder="الاسم" required class="p-2 border rounded">
+    <input name="place_of_birth" placeholder="مكان الميلاد" required class="p-2 border rounded">
+    <input name="birth_date" placeholder="تاريخ الميلاد" required class="p-2 border rounded">
+    <input name="department" placeholder="القسم" required class="p-2 border rounded">
+    <input name="position" placeholder="المنصب" required class="p-2 border rounded">
+    <input name="join_date" placeholder="تاريخ الانضمام" required class="p-2 border rounded">
+    <input name="leave_date" placeholder="تاريخ الانسحاب" class="p-2 border rounded">
+    <input name="note" placeholder="ملاحظة" class="p-2 border rounded">
+    <button class="col-span-2 bg-blue-600 text-white py-2 rounded">حفظ</button>
+</form>
+<table class="min-w-full bg-white rounded shadow text-sm">
+    <thead class="bg-blue-700 text-white">
+        <tr>
+            <th class="py-1">#</th>
+            <th>الاسم</th>
+            <th>تعديل</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for emp in employees %}
+        <tr class="border-b">
+            <form method="POST" action="/update/{{ emp.id }}">
+                <td class="p-1">{{ emp.id }}</td>
+                <td class="p-1"><input name="name" value="{{ emp.name }}" class="border rounded p-1"></td>
+                <td class="p-1"><button class="bg-yellow-400 px-2 rounded">تعديل</button></td>
+            </form>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
